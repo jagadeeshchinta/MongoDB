@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rental Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">🚗</span>
+                <span class="logo-text">RentWheels</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="dashboard" id="nav-dashboard">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-section="vehicles" id="nav-vehicles">
+                <span class="nav-icon">🚘</span>
+                <span class="nav-label">Vehicles</span>
+            </a>
+            <a href="#" class="nav-item" data-section="clients" id="nav-clients">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">Clients</span>
+            </a>
+            <a href="#" class="nav-item" data-section="reservations" id="nav-reservations">
+                <span class="nav-icon">📋</span>
+                <span class="nav-label">Reservations</span>
+            </a>
+            <a href="#" class="nav-item" data-section="vehicle-types" id="nav-vehicle-types">
+                <span class="nav-icon">🏷️</span>
+                <span class="nav-label">Vehicle Types</span>
+            </a>
+            <a href="#" class="nav-item" data-section="locations" id="nav-locations">
+                <span class="nav-icon">📍</span>
+                <span class="nav-label">Locations</span>
+            </a>
+            <a href="#" class="nav-item" data-section="administrators" id="nav-administrators">
+                <span class="nav-icon">🛡️</span>
+                <span class="nav-label">Administrators</span>
+            </a>
+            <a href="#" class="nav-item" data-section="accounts" id="nav-accounts">
+                <span class="nav-icon">🔑</span>
+                <span class="nav-label">Accounts</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="footer-info">
+                <span class="footer-dot"></span>
+                <span>MongoDB Connected</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <h1 class="page-title" id="pageTitle">Dashboard</h1>
+            <div class="topbar-right">
+                <span class="badge">Spring Boot 2.7</span>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section class="content-section active" id="section-dashboard">
+            <div class="stats-grid">
+                <div class="stat-card stat-vehicles">
+                    <div class="stat-icon">🚘</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="stat-vehicles">0</span>
+                        <span class="stat-label">Vehicles</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-clients">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="stat-clients">0</span>
+                        <span class="stat-label">Clients</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-reservations">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="stat-reservations">0</span>
+                        <span class="stat-label">Reservations</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-locations">
+                    <div class="stat-icon">📍</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="stat-locations">0</span>
+                        <span class="stat-label">Locations</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Vehicles</h3>
+                        <a href="#" class="card-link" data-goto="vehicles">View All →</a>
+                    </div>
+                    <div class="card-body" id="dashboard-vehicles"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Reservations</h3>
+                        <a href="#" class="card-link" data-goto="reservations">View All →</a>
+                    </div>
+                    <div class="card-body" id="dashboard-reservations"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vehicles Section -->
+        <section class="content-section" id="section-vehicles">
+            <div class="section-header">
+                <h2>Vehicles</h2>
+                <button class="btn btn-primary" onclick="openModal('vehicle')">+ Add Vehicle</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Power</th>
+                            <th>Seats</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vehicles-table"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Clients Section -->
+        <section class="content-section" id="section-clients">
+            <div class="section-header">
+                <h2>Clients</h2>
+                <button class="btn btn-primary" onclick="openModal('client')">+ Add Client</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Reservations</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clients-table"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Reservations Section -->
+        <section class="content-section" id="section-reservations">
+            <div class="section-header">
+                <h2>Reservations</h2>
+                <button class="btn btn-primary" onclick="openModal('reservation')">+ Add Reservation</button>
+            </div>
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterReservations('all', this)">All</button>
+                <button class="filter-btn" onclick="filterReservations('accepted', this)">Accepted</button>
+                <button class="filter-btn" onclick="filterReservations('pending', this)">Pending</button>
+                <button class="filter-btn" onclick="filterReservations('refused', this)">Refused</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Destination</th>
+                            <th>Arrival Date</th>
+                            <th>Status</th>
+                            <th>Travelers</th>
+                            <th>Comment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservations-table"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Vehicle Types Section -->
+        <section class="content-section" id="section-vehicle-types">
+            <div class="section-header">
+                <h2>Vehicle Types</h2>
+                <button class="btn btn-primary" onclick="openModal('vehicleType')">+ Add Type</button>
+            </div>
+            <div class="cards-grid" id="vehicle-types-cards"></div>
+        </section>
+
+        <!-- Locations Section -->
+        <section class="content-section" id="section-locations">
+            <div class="section-header">
+                <h2>Locations</h2>
+                <button class="btn btn-primary" onclick="openModal('location')">+ Add Location</button>
+            </div>
+            <div class="cards-grid" id="locations-cards"></div>
+        </section>
+
+        <!-- Administrators Section -->
+        <section class="content-section" id="section-administrators">
+            <div class="section-header">
+                <h2>Administrators</h2>
+                <button class="btn btn-primary" onclick="openModal('administrator')">+ Add Admin</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="administrators-table"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Accounts Section -->
+        <section class="content-section" id="section-accounts">
+            <div class="section-header">
+                <h2>Accounts</h2>
+                <button class="btn btn-primary" onclick="openModal('account')">+ Add Account</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Login</th>
+                            <th>Password</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="accounts-table"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New</h3>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <form id="modalForm" onsubmit="handleFormSubmit(event)">
+                <div class="modal-body" id="modalBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
